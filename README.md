@@ -1,6 +1,6 @@
 # Widartanto
 Digital Strategist & Practitioner.<br>
 Email: widartanto@gmail.com <br>
-IG: https://www.instagram.com/galiewidartanto/
+IG: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewidartanto</a>
 
 
