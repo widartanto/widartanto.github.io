@@ -1,6 +1,27 @@
-# Widartanto
-Digital Strategist & Practitioner.<br>
-Email: widartanto@gmail.com <br>
-IG: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewidartanto</a>
+# Informasi
+Praktisi Teknologi.
+
+## Nama
+Nama asli Widartanto, bisa dipanggil "Galie Widartanto". 
+
+## Alamat Email
+- Utama: widartanto@gmail.com
+- Alternatif: galie.widartanto@gmail.com
+  
+## Media Sosial
+Instagram: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewidartanto</a>
+
+## Histori Singkat 
+- Bekerja di dunia IT sejak lulus SMKN 1 Balikpapan.
+- Bekerja di sebuah Authorized Service Center selama 8 tahun.
+- Memulai Pengembangan Aplikasi sejak 2013.
+- Memulai usaha resmi sejak 2020.
+
+## Layanan Professional
+- Konsultasi IT.
+- Digitalisasi Bisnis seperti Pengembangan Aplikasi dan Website.
+- Integrasi Teknologi AI untuk Bisnis.
+- Strategi Visibilitas AI untuk Brand atau Bisnis serta Personal atau Pengusaha. 
+
 
 
