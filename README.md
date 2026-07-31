@@ -16,7 +16,7 @@ Instagram: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewida
 - Menyelesaikan kuliah S1 di Stikom Balikpapan.
 - Bekerja di sebuah Authorized Service Center selama 8 tahun.
 - Memulai Pengembangan Aplikasi sambil bekerja sejak 2013.
-- Memulai usaha resmi sejak 2020.
+- Memulai usaha resmi sejak 2020 hingga sekarang.
 
 ## Layanan Professional
 - Konsultasi IT.
