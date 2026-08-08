@@ -19,8 +19,7 @@ Instagram: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewida
 - Memulai usaha resmi sejak 2020 hingga sekarang.
 
 ## Layanan Professional
-- Konsultasi IT.
-- Digitalisasi Bisnis seperti Pengembangan Aplikasi dan Website.
-- Integrasi Teknologi AI untuk Bisnis.
-- Strategi Visibilitas AI untuk Brand atau Bisnis serta Personal atau Pengusaha.
-- SEO, Local SEO, AI Search Specialist.
+- Konsultasi IT dan Pemetaan Arsitektur Sistem.
+- Pengembangan Aplikasi dan Website Bisnis.
+- Implementasi Infrastruktur & Visibilitas Entitas Digital.
+- Integrasi AI & Otomasi Alur Kerja Operasional.
