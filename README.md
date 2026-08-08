@@ -1,7 +1,8 @@
 # Informasi
 Praktisi Teknologi.
-**Arsitektur Sistem & Integrasi AI**
-*Fokus Bidang: SEO | Local SEO | AI-Search*
+- **Arsitektur Sistem & Integrasi AI**
+- *Fokus Bidang: SEO | Local SEO | AI-Search*
+
 Balikpapan, Indonesia 
 
 ## Nama
