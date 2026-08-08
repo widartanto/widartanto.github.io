@@ -22,7 +22,5 @@ Instagram: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewida
 - Konsultasi IT.
 - Digitalisasi Bisnis seperti Pengembangan Aplikasi dan Website.
 - Integrasi Teknologi AI untuk Bisnis.
-- Strategi Visibilitas AI untuk Brand atau Bisnis serta Personal atau Pengusaha. 
-
-
-
+- Strategi Visibilitas AI untuk Brand atau Bisnis serta Personal atau Pengusaha.
+- SEO, Local SEO, AI Search Specialist.
