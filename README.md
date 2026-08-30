@@ -1,38 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta name="google-site-verification" content="NWKItJb1XmaEMVio4-nNEautycMIVlPeq6j8txztFQ8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="google-site-verification" content="NWKItJb1XmaEMVio4-nNEautycMIVlPeq6j8txztFQ8">
+  <meta name="description" content="Galie Widartanto — Praktisi Teknologi di Balikpapan, Indonesia, dengan fokus pada arsitektur sistem, integrasi AI, SEO, Local SEO, dan AI-Search.">
+  <meta name="author" content="Galie Widartanto">
+
+  <title>Galie Widartanto — Praktisi Teknologi</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    body {
+      background: #f6f8fa;
+      color: #24292f;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .doc-wrapper {
+      max-width: 1100px;
+      margin: 48px auto;
+    }
+
+    .doc-header {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 8px 8px 0 0;
+      padding: 32px;
+    }
+
+    .doc-header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .doc-header p {
+      color: #57606a;
+      margin-bottom: 0;
+    }
+
+    .doc-body {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-top: 0;
+      border-radius: 0 0 8px 8px;
+      padding: 32px;
+    }
+
+    .doc-section {
+      padding: 28px 0;
+      border-bottom: 1px solid #d8dee4;
+    }
+
+    .doc-section:first-child {
+      padding-top: 0;
+    }
+
+    .doc-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .doc-section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #d8dee4;
+    }
+
+    .doc-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 24px;
+    }
+
+    .doc-list {
+      padding-left: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    .doc-list li {
+      margin-bottom: 8px;
+    }
+
+    .label {
+      color: #57606a;
+      font-size: .875rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .code-label {
+      display: inline-block;
+      padding: 3px 7px;
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .85rem;
+    }
+
+    a {
+      color: #0969da;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .meta-card {
+      background: #f6f8fa;
+      border: 1px solid #d8dee4;
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .meta-card strong {
+      display: block;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .doc-wrapper {
+        margin: 16px auto;
+      }
+
+      .doc-header,
+      .doc-body {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 
-# Informasi
-Praktisi Teknologi.
-- **Arsitektur Sistem & Integrasi AI**
+<body>
 
-Fokus Bidang:
-- SEO
-- Local SEO
-- AI-Search
+<main class="container">
+  <div class="doc-wrapper">
 
-## Nama
-Nama asli Widartanto, bisa dipanggil "Galie Widartanto". 
+    <header class="doc-header">
+      <div class="label mb-2">Technical Profile</div>
+      <h1>Galie Widartanto</h1>
+      <p>Praktisi Teknologi · Balikpapan, Indonesia</p>
 
-Domisili: 
-- Balikpapan, Indonesia 
+      <div class="profile-meta">
+        <div class="meta-card">
+          <div class="label">Fokus Utama</div>
+          <strong>Arsitektur Sistem &amp; Integrasi AI</strong>
+        </div>
 
-## Alamat Email
-- Utama: widartanto@gmail.com
-- Alternatif: galie.widartanto@gmail.com
-  
-## Media Sosial
-Instagram: <a href="https://www.instagram.com/galiewidartanto/" id="">@galiewidartanto</a>
+        <div class="meta-card">
+          <div class="label">Bidang</div>
+          <strong>SEO · Local SEO · AI-Search</strong>
+        </div>
 
-## Histori Singkat 
-- Bekerja di dunia IT sejak lulus SMKN 1 Balikpapan.
-- Menyelesaikan kuliah S1 di Stikom Balikpapan.
-- Bekerja di sebuah Authorized Service Center selama 8 tahun.
-- Memulai Pengembangan Aplikasi sambil bekerja sejak 2013.
-- Memulai usaha resmi sejak 2020 hingga sekarang.
+        <div class="meta-card">
+          <div class="label">Lokasi</div>
+          <strong>Balikpapan, Indonesia</strong>
+        </div>
+      </div>
+    </header>
 
-## Layanan Professional
-- Konsultasi IT dan Pemetaan Arsitektur Sistem.
-- Pengembangan Aplikasi dan Website Bisnis.
-- Implementasi Infrastruktur & Visibilitas Entitas Digital.
-- Integrasi AI & Otomasi Alur Kerja Operasional.
+    <article class="doc-body">
+
+      <section class="doc-section">
+        <h2>Informasi</h2>
+
+        <p>
+          Praktisi Teknologi dengan fokus pada
+          <strong>Arsitektur Sistem &amp; Integrasi AI</strong>.
+        </p>
+
+        <h3>Fokus Bidang</h3>
+        <ul class="doc-list">
+          <li>SEO</li>
+          <li>Local SEO</li>
+          <li>AI-Search</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Nama</h2>
+
+        <p>
+          Nama asli <strong>Widartanto</strong>, dan dapat dipanggil
+          <strong>Galie Widartanto</strong>.
+        </p>
+
+        <p class="mb-0">
+          <span class="label">Domisili</span><br>
+          Balikpapan, Indonesia
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Alamat Email</h2>
+
+        <ul class="doc-list">
+          <li>
+            <strong>Utama:</strong>
+            <a href="mailto:widartanto@gmail.com">widartanto@gmail.com</a>
+          </li>
+          <li>
+            <strong>Alternatif:</strong>
+            <a href="mailto:galie.widartanto@gmail.com">galie.widartanto@gmail.com</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Media Sosial</h2>
+
+        <ul class="doc-list">
+          <li>
+            Instagram:
+            <a href="https://www.instagram.com/galiewidartanto/"
+               target="_blank"
+               rel="noopener noreferrer">
+              @galiewidartanto
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Histori Singkat</h2>
+
+        <ul class="doc-list">
+          <li>Bekerja di dunia IT sejak lulus SMKN 1 Balikpapan.</li>
+          <li>Menyelesaikan kuliah S1 di Stikom Balikpapan.</li>
+          <li>Bekerja di sebuah Authorized Service Center selama 8 tahun.</li>
+          <li>Memulai pengembangan aplikasi sambil bekerja sejak 2013.</li>
+          <li>Memulai usaha resmi sejak 2020 hingga sekarang.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Layanan Professional</h2>
+
+        <ul class="doc-list">
+          <li>Konsultasi IT dan Pemetaan Arsitektur Sistem.</li>
+          <li>Pengembangan Aplikasi dan Website Bisnis.</li>
+          <li>Implementasi Infrastruktur &amp; Visibilitas Entitas Digital.</li>
+          <li>Integrasi AI &amp; Otomasi Alur Kerja Operasional.</li>
+        </ul>
+      </section>
+
+    </article>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
