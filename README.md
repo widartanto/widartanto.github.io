@@ -1,7 +1,9 @@
+<meta name="google-site-verification" content="NWKItJb1XmaEMVio4-nNEautycMIVlPeq6j8txztFQ8" />
+
 # Informasi
 Praktisi Teknologi.
 - **Arsitektur Sistem & Integrasi AI**
-- *Fokus Bidang: SEO | Local SEO | AI-Search*
+- **Fokus Bidang: SEO | Local SEO | AI-Search**
 
 Balikpapan, Indonesia 
 
