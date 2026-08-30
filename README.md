@@ -1,14 +1,21 @@
+<head>
 <meta name="google-site-verification" content="NWKItJb1XmaEMVio4-nNEautycMIVlPeq6j8txztFQ8" />
+</head>
 
 # Informasi
 Praktisi Teknologi.
 - **Arsitektur Sistem & Integrasi AI**
-- **Fokus Bidang: SEO | Local SEO | AI-Search**
 
-Balikpapan, Indonesia 
+Fokus Bidang:
+- SEO
+- Local SEO
+- AI-Search
 
 ## Nama
 Nama asli Widartanto, bisa dipanggil "Galie Widartanto". 
+
+Domisili: 
+- Balikpapan, Indonesia 
 
 ## Alamat Email
 - Utama: widartanto@gmail.com
