@@ -296,7 +296,7 @@ Bagi Anda yang ingin berdiskusi atau berkonsultasi lebih lanjut mengenai arsitek
    <div style="font-family: monospace; font-size: 0.75rem; opacity: 0.65; text-align: left; padding: 5px 0;">
         <p style="margin-bottom: 0pt !important;">Informasi Dokumen</p>
         <ul style="padding-top: 0pt !important;">
-          <li>Terbit: 13 Oktober 2026</li>
+          <li>Terbit: 18 Oktober 2026</li>
           <li>Versi: [Doc. IDPDABA-Oct-2026-WELDI | oleh: Widartanto]</li>
        </ul>
 </div>
