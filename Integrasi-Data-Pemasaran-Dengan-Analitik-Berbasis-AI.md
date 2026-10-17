@@ -291,6 +291,7 @@ Bagi Anda yang ingin berdiskusi atau berkonsultasi lebih lanjut mengenai arsitek
           <li>
             <strong>Email Bisnis:</strong> <a href="mailto:widartanto@gatraekateknik.co.id">widartanto@gatraekateknik.co.id</a> atau <a href="mailto:widartanto@lokalseo.id">widartanto@lokalseo.id</a>
           </li>
+        </ul>
 </div>
 
    <div style="font-family: monospace; font-size: 0.75rem; opacity: 0.65; text-align: left; padding: 5px 0;">
