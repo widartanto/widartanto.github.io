@@ -33,7 +33,8 @@ Komponen yang sering diintegrasikan:
 - Data prospek, leads maupun inbound dari aplikasi CRM.
 - Pengeluaran biaya, interaksi, dan demografi dari platform iklan maupun media sosial.
 
-Aset visual dan deskripsi terkait implementasi bisa ditemukan di: https://www.instagram.com/reel/C2xRt2Ihs-P
+Aset visual dan deskripsi terkait implementasi bisa ditemukan di: 
+[https://www.instagram.com/reel/C2xRt2Ihs-P](https://www.instagram.com/reel/C2xRt2Ihs-P).
 
 
 ## 2. Kecerdasan Bisnis Berbasis AI | LLM-to-SQL 
@@ -46,7 +47,8 @@ melakukan analisi prediktif, memungkinkan pemrosesan bahasa alami (misal: analis
 Manfaatnya: 
 kecepatan pengambilan keputusan, efisiensi biaya & waktu, membantu menganalisa data kompleks melalui custom-system yang terjangkau. 
 
-Aset visual dan deskripsi terkait implementasi bisa ditemukan di: https://www.instagram.com/reel/C_soQvVhtbM
+Aset visual dan deskripsi terkait implementasi bisa ditemukan di: 
+[https://www.instagram.com/reel/C_soQvVhtbM](https://www.instagram.com/reel/C_soQvVhtbM).
 
 
 ## 3. Integrasi Data Pemasaran Dengan Analisis Berbasis AI
