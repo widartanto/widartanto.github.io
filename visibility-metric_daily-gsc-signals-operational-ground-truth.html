@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily GSC Signals & Operational Ground-Truth</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #fff;
+      --text: #182230;
+      --muted: #667085;
+      --border: #e5e9f0;
+      --blue: #3478f6;
+      --purple: #8966d9;
+      --green: #159a72;
+      --orange: #e69a35;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 26px 16px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main { max-width: 1180px; margin: auto; }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.2;
+    }
+
+    h2 { margin: 0; font-size: 20px; }
+
+    p {
+      line-height: 1.65;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+
+    .intro { max-width: 820px; color: var(--muted); }
+
+    .panel, .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(20,35,60,.035);
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      margin-top: 22px;
+    }
+
+    .kpi { padding: 17px; min-width: 0; }
+
+    .kpi-label { color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .kpi-value {
+      margin-top: 8px;
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .kpi-note { color: var(--muted); font-size: 11px; margin-top: 6px; }
+
+    .panel {
+      padding: 20px 18px 12px;
+      margin-bottom: 18px;
+      min-width: 0;
+    }
+
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .chart { min-height: 330px; width: 100%; }
+
+    .note {
+      padding: 13px 15px;
+      background: #f7f9fc;
+      border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      color: #344054;
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+
+    .footer {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 14px 2px;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 18px 10px; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .panel { padding: 16px 9px 10px; }
+      .chart { min-height: 310px; }
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="eyebrow">1st-Party Measurement · Daily Analysis</div>
+    <h1>Daily GSC Signals &amp;<br>Operational Ground-Truth</h1>
+    <p class="intro">
+      Pembacaan harian sinyal visibilitas pencarian berdampingan dengan
+      aktivitas transaksi dan pelanggan baru. Gunakan zoom untuk meninjau
+      periode tertentu tanpa kehilangan konteks data secara keseluruhan.
+    </p>
+  </header>
+
+  <section class="kpis">
+    <article class="kpi">
+      <div class="kpi-label">Tanggal Terakhir</div>
+      <div class="kpi-value" id="lastDate">—</div>
+      <div class="kpi-note">Berdasarkan data yang dimuat</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Nota Transaksi</div>
+      <div class="kpi-value" id="totalNota">—</div>
+      <div class="kpi-note">Total periode terpilih dalam file</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Pelanggan Baru</div>
+      <div class="kpi-value" id="totalBaru">—</div>
+      <div class="kpi-note">Total periode terpilih dalam file</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Hari dengan Data</div>
+      <div class="kpi-value" id="daysCount">—</div>
+      <div class="kpi-note">Jumlah baris tanggal valid</div>
+    </article>
+  </section>
+
+  
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>01 · Combined Signals &amp; Activity</h2>
+        <p class="muted">GSC Page, GSC AI, nota transaksi, dan pelanggan baru</p>
+      </div>
+    </div>
+    <div id="combinedChart" class="chart"></div>
+    <div class="note">
+      <strong>Cara membaca:</strong> grafik ini menggabungkan keempat seri harian
+      dari Grafik 02 dan Grafik 03. Gunakan zoom untuk meninjau periode tertentu;
+      GSC AI yang kosong tetap tidak dianggap sebagai nol.
+    </div>
+  </section>
+
+
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>02 · Daily Visibility</h2>
+        <p class="muted">GSC Page dan GSC AI · sumbu Y terpisah</p>
+      </div>
+    </div>
+    <div id="visibilityChart" class="chart"></div>
+    <div class="note">
+      <strong>Cara membaca:</strong> gunakan zoom atau pilih rentang tanggal
+      pada grafik untuk melihat perubahan sinyal secara lebih dekat.
+      GSC AI yang kosong tidak dianggap sebagai nol.
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>03 · Daily Business Activity</h2>
+        <p class="muted">Nota transaksi dan pelanggan baru</p>
+      </div>
+    </div>
+    <div id="businessChart" class="chart"></div>
+    <div class="note">
+      <strong>Cara membaca:</strong> bandingkan aktivitas bisnis dengan
+      grafik visibilitas pada rentang tanggal yang sama. Perubahan yang
+      berdekatan waktunya menjadi bahan analisis konteks, bukan bukti
+      otomatis bahwa satu metrik menyebabkan perubahan metrik lainnya.
+    </div>
+  </section>
+
+
+  <div class="footer">
+    Sumber: data harian 1st-party tertanam otomatis. Grafik tidak membuat atau merekonstruksi data yang tidak tersedia.
+  </div>
+</main>
+
+<script>
+function normalizeHeader(value) {
+  return String(value ?? "")
+    .replace(/^\uFEFF/, "")
+    .replace(/\u00A0/g, " ")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function getColumn(row, aliases) {
+  const normalizedKeys = Object.keys(row);
+  for (const alias of aliases) {
+    const target = normalizeHeader(alias);
+    const foundKey = normalizedKeys.find(
+      key => normalizeHeader(key) === target
+    );
+    if (foundKey !== undefined) {
+      return row[foundKey];
+    }
+  }
+  return undefined;
+}
+
+const $ = id => document.getElementById(id);
+const fmt = n => new Intl.NumberFormat("id-ID").format(n);
+
+let visibilityChart = null;
+let businessChart = null;
+let combinedChart = null;
+
+const COLUMN_ALIASES = {
+  date: ["Tanggal", "tanggal", "date", "Date"],
+  page: ["GSC Page", "gsc_page", "GSC_Page"],
+  ai: ["GSC AI", "gsc_ai", "GSC_AI"],
+  nota: ["juml_nota", "Jumlah Nota", "nota", "transaksi"],
+  baru: ["pelanggan_baru", "Pelanggan Baru", "pelanggan baru"]
+};
+
+function parseNumber(value) {
+  if (value === undefined || value === null || String(value).trim() === "") {
+    return null;
+  }
+  let s = String(value).trim();
+  if (/^-?\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) {
+    s = s.replace(/\./g, "").replace(",", ".");
+  } else if (/^-?\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) {
+    s = s.replace(/,/g, "");
+  } else {
+    s = s.replace(",", ".");
+  }
+  const n = Number(s);
+  return Number.isFinite(n) ? n : null;
+}
+
+function parseDate(value) {
+  if (value === undefined || value === null) return null;
+  const s = String(value).trim();
+  if (!s) return null;
+
+  let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) {
+    const d = new Date(+m[1], +m[2] - 1, +m[3]);
+    return validDate(d, +m[1], +m[2], +m[3]);
+  }
+
+  m = s.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+  if (m) {
+    const day = +m[1], month = +m[2], year = +m[3];
+    const d = new Date(year, month - 1, day);
+    return validDate(d, year, month, day);
+  }
+
+  return null;
+}
+
+function validDate(date, year, month, day) {
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) return null;
+  return date;
+}
+
+function dayKey(date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function displayDate(key) {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString("id-ID", {
+    day: "2-digit", month: "short", year: "numeric"
+  });
+}
+
+function seriesData(rows, field) {
+  return rows.map(row => ({
+    x: row.x,
+    y: row[field]
+  }));
+}
+
+function chartBase() {
+  return {
+    chart: {
+      type: "line",
+      height: 360,
+      group: "daily-ground-truth",
+      zoom: { enabled: true, type: "x", autoScaleYaxis: false },
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true
+        }
+      },
+      animations: { enabled: false },
+      fontFamily: "Arial, Helvetica, sans-serif",
+      parentHeightOffset: 0
+    },
+    dataLabels: { enabled: false },
+    grid: {
+      borderColor: "#e5e9f0",
+      strokeDashArray: 4,
+      padding: { left: 6, right: 12 }
+    },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        datetimeUTC: false,
+        style: { colors: "#667085", fontSize: "11px" }
+      },
+      tooltip: { enabled: false }
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      x: { format: "dd MMM yyyy" },
+      y: { formatter: value =>
+        value === null || value === undefined ? "Tidak tersedia" : fmt(value)
+      }
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "left",
+      fontSize: "13px"
+    },
+    noData: { text: "Memuat data..." }
+  };
+}
+
+function renderCharts(rows) {
+  if (visibilityChart) visibilityChart.destroy();
+  if (businessChart) businessChart.destroy();
+  if (combinedChart) combinedChart.destroy();
+
+  const base = chartBase();
+
+  visibilityChart = new ApexCharts($("visibilityChart"), {
+    ...base,
+    series: [
+      { name: "GSC Page", data: seriesData(rows, "page") },
+      { name: "GSC AI", data: seriesData(rows, "ai") }
+    ],
+    colors: ["#3478f6", "#8966d9"],
+    stroke: { curve: "straight", width: [2.5, 2.5] },
+    markers: { size: 0, hover: { size: 4 } },
+    yaxis: [
+      {
+        seriesName: "GSC Page",
+        min: 0,
+        title: { text: "GSC Page" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      },
+      {
+        seriesName: "GSC AI",
+        opposite: true,
+        min: 0,
+        title: { text: "GSC AI" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      }
+    ]
+  });
+
+  businessChart = new ApexCharts($("businessChart"), {
+    ...base,
+    series: [
+      { name: "Nota Transaksi", data: seriesData(rows, "nota") },
+      { name: "Pelanggan Baru", data: seriesData(rows, "baru") }
+    ],
+    colors: ["#3478f6", "#159a72"],
+    stroke: { curve: "straight", width: [2.5, 2.5] },
+    markers: { size: 0, hover: { size: 4 } },
+    yaxis: {
+      min: 0,
+      title: { text: "Jumlah" },
+      labels: { formatter: v => fmt(Math.round(v)) }
+    }
+  });
+
+  combinedChart = new ApexCharts($("combinedChart"), {
+    ...base,
+    series: [
+      { name: "GSC Page", data: seriesData(rows, "page") },
+      { name: "GSC AI", data: seriesData(rows, "ai") },
+      { name: "Nota Transaksi", data: seriesData(rows, "nota") },
+      { name: "Pelanggan Baru", data: seriesData(rows, "baru") }
+    ],
+    colors: ["#3478f6", "#8966d9", "#159a72", "#e69a35"],
+    stroke: { curve: "straight", width: [2.5, 2.5, 2.5, 2.5] },
+    markers: { size: 0, hover: { size: 4 } },
+    yaxis: [
+      {
+        seriesName: "GSC Page",
+        min: 0,
+        title: { text: "GSC Page" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      },
+      {
+        seriesName: "GSC AI",
+        opposite: true,
+        min: 0,
+        title: { text: "GSC AI" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      },
+      {
+        seriesName: "Nota Transaksi",
+        min: 0,
+        title: { text: "Nota Transaksi" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      },
+      {
+        seriesName: "Pelanggan Baru",
+        opposite: true,
+        min: 0,
+        title: { text: "Pelanggan Baru" },
+        labels: { formatter: v => fmt(Math.round(v)) }
+      }
+    ]
+  });
+
+  visibilityChart.render();
+  businessChart.render();
+  combinedChart.render();
+}
+
+// Data CSV GSC & Operational disematkan langsung
+const embeddedCsvData = `Tanggal;GSC Page;GSC AI ;juml_nota;pelanggan_baru
+2025-07-01;43;;56;26
+2025-07-02;62;;51;36
+2025-07-03;53;;67;33
+2025-07-04;66;;53;29
+2025-07-05;45;;53;32
+2025-07-06;59;;44;25
+2025-07-07;53;;45;29
+2025-07-08;42;;46;24
+2025-07-09;33;;43;19
+2025-07-10;28;;49;24
+2025-07-11;33;;36;24
+2025-07-12;23;;49;38
+2025-07-13;28;;44;33
+2025-07-14;38;;54;26
+2025-07-15;31;;51;24
+2025-07-16;24;;43;26
+2025-07-17;34;;46;19
+2025-07-18;23;;44;18
+2025-07-19;27;;51;43
+2025-07-20;29;;36;20
+2025-07-21;30;;41;25
+2025-07-22;31;;58;28
+2025-07-23;29;;48;21
+2025-07-24;33;;50;34
+2025-07-25;27;;46;29
+2025-07-26;24;;51;23
+2025-07-27;31;;32;18
+2025-07-28;29;;48;28
+2025-07-29;29;;42;24
+2025-07-30;30;;48;27
+2025-07-31;28;;46;26
+2025-08-01;34;;52;31
+2025-08-02;26;;52;31
+2025-08-03;31;;35;23
+2025-08-04;25;;48;27
+2025-08-05;34;;44;24
+2025-08-06;28;;44;27
+2025-08-07;27;;42;23
+2025-08-08;30;;41;26
+2025-08-09;27;;47;26
+2025-08-10;32;;35;24
+2025-08-11;29;;43;23
+2025-08-12;32;;52;31
+2025-08-13;31;;43;25
+2025-08-14;28;;46;28
+2025-08-15;28;;46;27
+2025-08-16;32;;47;26
+2025-08-17;24;;35;19
+2025-08-18;26;;45;24
+2025-08-19;29;;42;24
+2025-08-20;26;;52;29
+2025-08-21;30;;48;27
+2025-08-22;32;;47;27
+2025-08-23;30;;49;28
+2025-08-24;27;;36;22
+2025-08-25;32;;47;28
+2025-08-26;27;;41;24
+2025-08-27;30;;46;29
+2025-08-28;25;;47;26
+2025-08-29;26;;46;29
+2025-08-30;27;;45;28
+2025-08-31;27;;37;23
+2025-09-01;34;;52;30
+2025-09-02;27;;44;26
+2025-09-03;27;;48;27
+2025-09-04;30;;48;26
+2025-09-05;28;;49;31
+2025-09-06;31;;48;28
+2025-09-07;32;;35;22
+2025-09-08;27;;48;29
+2025-09-09;28;;42;27
+2025-09-10;31;;46;27
+2025-09-11;27;;49;29
+2025-09-12;29;;51;33
+2025-09-13;30;;53;30
+2025-09-14;34;;34;20
+2025-09-15;29;;46;27
+2025-09-16;32;;43;25
+2025-09-17;31;;45;26
+2025-09-18;28;;49;29
+2025-09-19;30;;49;28
+2025-09-20;30;;45;27
+2025-09-21;32;;35;21
+2025-09-22;30;;43;27
+2025-09-23;29;;43;26
+2025-09-24;31;;45;28
+2025-09-25;27;;47;28
+2025-09-26;30;;48;27
+2025-09-27;33;;48;28
+2025-09-28;31;;35;22
+2025-09-29;29;;47;29
+2025-09-30;30;;49;28
+2025-10-01;32;;50;29
+2025-10-02;30;;47;28
+2025-10-03;31;;47;29
+2025-10-04;33;;45;26
+2025-10-05;34;;37;22
+2025-10-06;30;;44;27
+2025-10-07;32;;44;28
+2025-10-08;28;;46;28
+2025-10-09;30;;47;28
+2025-10-10;32;;51;31
+2025-10-11;31;;50;31
+2025-10-12;32;;37;22
+2025-10-13;31;;43;27
+2025-10-14;29;;44;27
+2025-10-15;30;;47;29
+2025-10-16;30;;47;27
+2025-10-17;32;;49;31
+2025-10-18;29;;46;28
+2025-10-19;31;;36;22
+2025-10-20;31;;44;26
+2025-10-21;31;;44;27
+2025-10-22;29;;49;30
+2025-10-23;30;;46;28
+2025-10-24;29;;48;29
+2025-10-25;32;;46;29
+2025-10-26;35;;36;22
+2025-10-27;31;;45;28
+2025-10-28;31;;45;27
+2025-10-29;32;;48;28
+2025-10-30;29;;46;28
+2025-10-31;29;;47;29
+2025-11-01;30;;49;31
+2025-11-02;30;;37;23
+2025-11-03;31;;45;28
+2025-11-04;32;;46;27
+2025-11-05;33;;48;29
+2025-11-06;30;;46;28
+2025-11-07;32;;49;30
+2025-11-08;30;;47;29
+2025-11-09;33;;36;22
+2025-11-10;33;;44;27
+2025-11-11;33;;46;28
+2025-11-12;30;;48;29
+2025-11-13;31;;47;28
+2025-11-14;30;;51;31
+2025-11-15;31;;47;28
+2025-11-16;31;;36;22
+2025-11-17;30;;45;27
+2025-11-18;31;;44;27
+2025-11-19;30;;47;29
+2025-11-20;32;;47;28
+2025-11-21;32;;48;29
+2025-11-22;31;;47;29
+2025-11-23;32;;36;23
+2025-11-24;31;;45;27
+2025-11-25;32;;44;27
+2025-11-26;33;;49;30
+2025-11-27;30;;46;28
+2025-11-28;32;;48;29
+2025-11-29;30;;46;28
+2025-11-30;30;;38;23
+2025-12-01;31;;51;32
+2025-12-02;30;;47;29
+2025-12-03;31;;49;30
+2025-12-04;33;;47;28
+2025-12-05;32;;50;31
+2025-12-06;33;;48;30
+2025-12-07;31;;37;23
+2025-12-08;32;;47;29
+2025-12-09;32;;46;28
+2025-12-10;32;;48;29
+2025-12-11;30;;48;29
+2025-12-12;32;;50;31
+2025-12-13;30;;48;29
+2025-12-14;34;;36;23
+2025-12-15;31;;46;28
+2025-12-16;32;;44;28
+2025-12-17;32;;49;30
+2025-12-18;31;;47;28
+2025-12-19;32;;49;30
+2025-12-20;32;;48;29
+2025-12-21;32;;36;23
+2025-12-22;30;;45;27
+2025-12-23;32;;45;27
+2025-12-24;31;;46;28
+2025-12-25;32;;41;25
+2025-12-26;34;;46;28
+2025-12-27;33;;46;28
+2025-12-28;31;;36;23
+2025-12-29;32;;45;27
+2025-12-30;31;;46;28
+2025-12-31;31;;47;29
+2026-01-01;124;2;48;28
+2026-01-02;118;3;45;26
+2026-01-03;135;2;49;29
+2026-01-04;110;1;35;21
+2026-01-05;127;4;46;27
+2026-01-06;122;3;43;25
+2026-01-07;131;2;47;28
+2026-01-08;119;3;48;28
+2026-01-09;128;5;50;30
+2026-01-10;133;4;47;28
+2026-01-11;112;1;36;22
+2026-01-12;125;3;45;27
+2026-01-13;121;2;43;26
+2026-01-14;130;4;47;28
+2026-01-15;126;3;46;28
+2026-01-16;132;4;48;29
+2026-01-17;129;3;47;28
+2026-01-18;115;2;36;22
+2026-01-19;124;3;45;27
+2026-01-20;123;4;44;26
+2026-01-21;128;3;48;29
+2026-01-22;127;5;47;28
+2026-01-23;131;4;49;30
+2026-01-24;130;3;47;28
+2026-01-25;114;2;37;22
+2026-01-26;125;3;46;28
+2026-01-27;122;4;44;26
+2026-01-28;129;3;48;29
+2026-01-29;126;4;47;28
+2026-01-30;131;5;49;30
+2026-01-31;128;3;48;29
+2026-02-01;129;4;48;29
+2026-02-02;125;3;45;27
+2026-02-03;128;4;46;28
+2026-02-04;126;3;46;28
+2026-02-05;131;5;49;30
+2026-02-06;130;4;48;29
+2026-02-07;129;3;48;29
+2026-02-08;116;2;37;22
+2026-02-09;126;3;46;28
+2026-02-10;124;4;45;27
+2026-02-11;129;3;48;29
+2026-02-12;128;4;47;28
+2026-02-13;132;5;49;30
+2026-02-14;130;4;48;29
+2026-02-15;117;2;38;23
+2026-02-16;127;3;47;28
+2026-02-17;125;4;45;27
+2026-02-18;130;3;49;30
+2026-02-19;128;4;47;28
+2026-02-20;133;5;50;30
+2026-02-21;131;4;48;29
+2026-02-22;118;2;38;23
+2026-02-23;128;3;47;28
+2026-02-24;126;4;46;28
+2026-02-25;131;3;49;30
+2026-02-26;129;4;48;29
+2026-02-27;134;5;51;31
+2026-02-28;132;4;49;30
+2026-03-01;131;5;49;30
+2026-03-02;127;4;46;28
+2026-03-03;130;5;48;29
+2026-03-04;128;4;47;28
+2026-03-05;133;6;50;30
+2026-03-06;132;5;49;30
+2026-03-07;131;4;49;30
+2026-03-08;119;3;38;23
+2026-03-09;129;4;47;28
+2026-03-10;127;5;46;28
+2026-03-11;132;4;49;30
+2026-03-12;130;5;48;29
+2026-03-13;135;6;51;31
+2026-03-14;133;5;49;30
+2026-03-15;120;3;39;24
+2026-03-16;130;4;48;29
+2026-03-17;128;5;47;28
+2026-03-18;133;4;50;30
+2026-03-19;131;5;48;29
+2026-03-20;136;6;52;32
+2026-03-21;134;5;50;30
+2026-03-22;121;3;39;24
+2026-03-23;131;4;48;29
+2026-03-24;129;5;47;28
+2026-03-25;134;4;50;30
+2026-03-26;132;5;48;29
+2026-03-27;137;6;52;32
+2026-03-28;135;5;50;30
+2026-03-29;122;3;39;24
+2026-03-30;132;4;48;29
+2026-03-31;130;5;47;28
+2026-04-01;182;12;53;31
+2026-04-02;175;10;51;29
+2026-04-03;188;14;55;32
+2026-04-04;162;8;40;24
+2026-04-05;179;11;52;30
+2026-04-06;173;10;49;28
+2026-04-07;185;13;54;31
+2026-04-08;177;11;52;30
+2026-04-09;182;15;56;32
+2026-04-10;186;13;54;31
+2026-04-11;165;9;41;25
+2026-04-12;180;12;51;29
+2026-04-13;176;10;49;28
+2026-04-14;184;13;54;31
+2026-04-15;181;11;52;30
+2026-04-16;187;14;55;32
+2026-04-17;183;12;53;31
+2026-04-18;167;9;42;25
+2026-04-19;180;11;51;29
+2026-04-20;178;12;50;28
+2026-04-21;183;11;53;30
+2026-04-22;182;14;52;30
+2026-04-23;186;13;55;32
+2026-04-24;185;12;54;31
+2026-04-25;168;9;43;25
+2026-04-26;181;11;51;29
+2026-04-27;179;12;50;28
+2026-04-28;184;11;53;30
+2026-04-29;182;13;52;30
+2026-04-30;188;14;55;32
+2026-05-01;186;13;54;31
+2026-05-02;170;9;44;26
+2026-05-03;182;11;52;30
+2026-05-04;180;12;51;29
+2026-05-05;185;13;54;31
+2026-05-06;183;12;53;30
+2026-05-07;188;15;56;32
+2026-05-08;186;13;54;31
+2026-05-09;171;9;45;26
+2026-05-10;183;11;52;30
+2026-05-11;181;12;51;29
+2026-05-12;186;13;54;31
+2026-05-13;184;12;53;30
+2026-05-14;189;15;57;32
+2026-05-15;187;13;55;31
+2026-05-16;172;9;45;26
+2026-05-17;184;11;52;30
+2026-05-18;182;12;51;29
+2026-05-19;187;13;54;31
+2026-05-20;185;12;53;30
+2026-05-21;190;15;57;32
+2026-05-22;188;13;55;31
+2026-05-23;173;9;45;26
+2026-05-24;185;11;52;30
+2026-05-25;183;12;51;29
+2026-05-26;188;13;54;31
+2026-05-27;186;12;53;30
+2026-05-28;191;15;58;33
+2026-05-29;189;13;55;31
+2026-05-30;174;9;46;26
+2026-05-31;186;11;52;30
+2026-06-01;220;16;58;32
+2026-06-02;212;14;53;29
+2026-06-03;225;18;59;33
+2026-06-04;205;11;44;25
+2026-06-05;218;15;54;30
+2026-06-06;210;13;51;28
+2026-06-07;223;17;57;32
+2026-06-08;215;14;55;30
+2026-06-09;221;19;60;33
+2026-06-10;226;16;58;32
+2026-06-11;208;12;46;26
+2026-06-12;219;15;54;30
+2026-06-13;214;13;52;28
+2026-06-14;222;16;57;31
+2026-06-15;220;14;55;30
+2026-06-16;227;18;60;33
+2026-06-17;223;15;58;32
+2026-06-18;211;12;47;26
+2026-06-19;218;14;54;30
+2026-06-20;216;15;53;29
+2026-06-21;222;14;56;31
+2026-06-22;220;17;55;30
+2026-06-23;225;16;59;32
+2026-06-24;224;15;57;31
+2026-06-25;209;12;47;26
+2026-06-26;219;14;54;30
+2026-06-27;217;15;53;29
+2026-06-28;223;14;56;31
+2026-06-29;221;17;55;30
+2026-06-30;226;16;59;32
+2026-07-01;230;18;60;33
+2026-07-02;224;15;56;31
+2026-07-03;233;19;61;33
+2026-07-04;212;12;47;26
+2026-07-05;227;16;55;30
+2026-07-06;220;14;53;29
+2026-07-07;231;18;59;32
+2026-07-08;225;15;57;31
+2026-07-09;232;20;62;34
+2026-07-10;235;17;60;33
+2026-07-11;215;12;48;26
+2026-07-12;228;16;55;30
+2026-07-13;223;14;53;29
+2026-07-14;231;18;59;32
+2026-07-15;228;15;57;31
+2026-07-16;234;19;62;34
+2026-07-17;230;16;60;33
+2026-07-18;217;12;48;26
+2026-07-19;226;15;55;30
+2026-07-20;224;16;54;29
+2026-07-21;229;15;57;31
+2026-07-22;227;18;56;30
+2026-07-23;232;17;60;33
+2026-07-24;231;16;58;32
+2026-07-25;218;13;49;27
+2026-07-26;226;15;55;30
+2026-07-27;224;16;54;29
+2026-07-28;229;15;57;31
+2026-07-29;227;17;56;30
+2026-07-30;233;18;60;33
+2026-07-31;231;16;58;32
+2026-08-01;232;17;59;32
+2026-08-02;227;15;55;30
+2026-08-03;230;16;57;31
+2026-08-04;229;15;56;30
+2026-08-05;234;19;61;33
+2026-08-06;232;17;59;32
+2026-08-07;231;16;58;32
+2026-08-08;218;13;49;27
+2026-08-09;228;15;56;30
+2026-08-10;226;16;55;30
+2026-08-11;231;15;58;32
+2026-08-12;229;17;57;31
+2026-08-13;235;19;62;34
+2026-08-14;233;16;60;33
+2026-08-15;219;13;50;27
+2026-08-16;229;15;56;30
+2026-08-17;227;16;55;30
+2026-08-18;232;15;58;32
+2026-08-19;230;17;57;31
+2026-08-20;236;19;62;34
+2026-08-21;234;16;60;33
+2026-08-22;220;13;50;27
+2026-08-23;230;15;56;30
+2026-08-24;228;16;55;30
+2026-08-25;233;15;58;32
+2026-08-26;231;17;57;31
+2026-08-27;237;19;63;34
+2026-08-28;235;16;61;33
+2026-08-29;221;13;51;28
+2026-08-30;231;15;57;31
+2026-08-31;229;16;56;30
+2026-09-01;262;21;63;34
+2026-09-02;254;18;58;31
+2026-09-03;267;23;64;35
+2026-09-04;245;15;52;28
+2026-09-05;259;20;60;32
+2026-09-06;252;17;57;31
+2026-09-07;265;22;62;34
+2026-09-08;258;19;60;33
+2026-09-09;264;24;65;36
+2026-09-10;269;21;63;34
+2026-09-11;248;16;53;29
+2026-09-12;260;19;59;32
+2026-09-13;256;17;57;31
+2026-09-14;263;22;62;34
+2026-09-15;261;19;60;33
+2026-09-16;268;24;65;36
+2026-09-17;265;20;63;34
+2026-09-18;250;16;53;29
+2026-09-19;259;19;59;32
+2026-09-20;257;20;58;31
+2026-09-21;262;19;61;33
+2026-09-22;260;22;60;33
+2026-09-23;250;20;50;27
+2026-09-24;216;17;57;33
+2026-09-25;229;16;45;25
+2026-09-26;269;17;61;43
+2026-09-27;220;12;51;28
+2026-09-28;236;19;62;36
+2026-09-29;219;8;59;30
+2026-09-30;256;13;67;43`;
+
+// Eksekusi otomatis saat halaman selesai dimuat
+window.addEventListener("DOMContentLoaded", () => {
+  Papa.parse(embeddedCsvData, {
+    header: true,
+    skipEmptyLines: "greedy",
+    complete: result => {
+      if (!result.data || !result.data.length) {
+        console.error("CSV kosong atau tidak terbaca.");
+        return;
+      }
+
+      const rows = result.data
+        .map(row => {
+          const date = parseDate(getColumn(row, COLUMN_ALIASES.date));
+          if (!date) return null;
+
+          return {
+            key: dayKey(date),
+            x: date.getTime(),
+            page: parseNumber(getColumn(row, COLUMN_ALIASES.page)),
+            ai: parseNumber(getColumn(row, COLUMN_ALIASES.ai)),
+            nota: parseNumber(getColumn(row, COLUMN_ALIASES.nota)),
+            baru: parseNumber(getColumn(row, COLUMN_ALIASES.baru))
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.x - b.x);
+
+      if (!rows.length) {
+        console.error("Tanggal tidak dikenali.");
+        return;
+      }
+
+      renderCharts(rows);
+
+      const sumAvailable = key =>
+        rows.reduce((sum, row) => sum + (row[key] ?? 0), 0);
+
+      $("lastDate").textContent = displayDate(rows[rows.length - 1].key);
+      $("totalNota").textContent = fmt(sumAvailable("nota"));
+      $("totalBaru").textContent = fmt(sumAvailable("baru"));
+      $("daysCount").textContent = fmt(rows.length);
+    },
+    error: error => {
+      console.error("Gagal memparsing CSV: " + error.message);
+    }
+  });
+});
+</script>
+</body>
+</html>
