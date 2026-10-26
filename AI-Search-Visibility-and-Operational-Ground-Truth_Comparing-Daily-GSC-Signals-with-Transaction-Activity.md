@@ -236,6 +236,6 @@ Bagi Anda yang ingin berdiskusi atau berkonsultasi lebih lanjut mengenai arsitek
 ---
 
 Informasi Dokumen: 
-* Versi:[Doc. IDP-AIVIS-OCT2026-WELDI | oleh: Widartanto]
+* Versi:[Doc. IDP-AIVIS-OCT2026-WELDI-GYRO | oleh: Widartanto]
 * Terbit: 27 Oktober 2026
 
