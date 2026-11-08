@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulator WebMCP - Sektor Hotel</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 16px;
+      font-family: Arial, sans-serif;
+      color: #182230;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th { background: #f0f5ff; }
+
+    #status, pre {
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f7f9fc;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    small { color: #667085; }
+  </style>
+</head>
+
+<body>
+  <h1>Simulator WebMCP - Hotel</h1>
+  <p>Berisi data dummy dan bertujuan untuk memberikan sudut pandang atau praktik pada audiens.</p>
+
+  <div id="status" role="status">Menyiapkan halaman…</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kode_Kamar</th>
+          <th>Fasilitas</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="inventory-body"></tbody>
+    </table>
+  </div>
+
+  <button id="test-tool" type="button" disabled>
+    Uji melalui API WebMCP
+  </button>
+
+  <p>
+    <small>
+      Tombol memakai getTools() dan executeTool(), bukan memanggil
+      fungsi pencarian secara langsung.
+    </small>
+  </p>
+
+  <pre id="output">Belum ada pemanggilan tool.</pre>
+
+  <!-- Satu sumber data untuk tabel dan tool. Semua angka dummy. -->
+  <script id="inventory-json" type="application/json">
+  [
+    {
+      "Kode_Kamar": "K123",
+      "Fasilitas": "Double Bed, AC, TV",
+      "Status_Kamar": "Vacant"
+    },
+    {
+      "Kode_Kamar": "K124",
+      "Fasilitas": "Single Bed, AC, TV",
+      "Status_Kamar": "Occupied"
+    },
+    {
+      "Kode_Kamar": "K125",
+      "Fasilitas": "Single Bed, AC, TV, Mini Kulkas",
+      "Status_Kamar": "Vacant"
+    },
+    {
+      "Kode_Kamar": "K126",
+      "Fasilitas": "Double Bed, AC, TV, Mini Kulkas, Internet",
+      "Status_Kamar":  "Occupied"
+    }
+  ]
+  </script>
+
+  <script>
+  (async () => {
+    "use strict";
+
+    const TOOL_NAME = "cari_status_kamar";
+
+    const status = document.getElementById("status");
+    const output = document.getElementById("output");
+    const button = document.getElementById("test-tool");
+    const tbody = document.getElementById("inventory-body");
+
+    const inventory = JSON.parse(
+      document.getElementById("inventory-json").textContent
+    );
+
+    // Render lima baris dari JSON yang sama.
+    for (const item of inventory) {
+      const row = document.createElement("tr");
+
+      for (const key of ["Kode_Kamar", "Fasilitas", "Status_Kamar"]) {
+        const cell = document.createElement("td");
+        cell.textContent = String(item[key]);
+        row.appendChild(cell);
+      }
+
+      tbody.appendChild(row);
+    }
+
+    // API terbaru diprioritaskan; dukung namespace lama bila tersedia.
+    const context =
+      typeof document.modelContext?.registerTool === "function"
+        ? document.modelContext
+        : typeof navigator.modelContext?.registerTool === "function"
+          ? navigator.modelContext
+          : null;
+
+    const apiName = context === document.modelContext && context
+      ? "document.modelContext"
+      : "navigator.modelContext";
+
+    if (!context) {
+      status.textContent =
+        "TIDAK TERDAFTAR: API WebMCP tidak tersedia pada browser ini.\n" +
+        "Secure context: " + window.isSecureContext + "\n" +
+        "Tabel tetap berfungsi, tetapi registrasi native belum bisa dilakukan.";
+
+      console.warn("[WebMCP demo] API tidak tersedia.");
+      return;
+    }
+
+    let invocationCount = 0;
+
+    try {
+      await context.registerTool({
+        name: TOOL_NAME,
+
+        description:
+          "Cari data ketersediaan kamar berdasar status " +
+          "Status baku pada kamar: Vacant, Occupied. Silahkan konversi status dari pertanyaan audiens ke 2 status wajib ini." +
+          "Contoh: ready atau kosong artinya Vacant, dan terisi artinya Occupied. " +
+          "Mengembalikan Kode Kamar, Fasilitas, dan status.",
+
+        inputSchema: {
+          type: "object",
+          properties: {
+            keyword: {
+              type: "string",
+              minLength: 1,
+              description: "Status Ketersediaan Kamar."
+            }
+          },
+          required: ["keyword"],
+          additionalProperties: false
+        },
+
+        annotations: {
+          readOnlyHint: true
+        },
+
+        execute: async ({ keyword } = {}) => {
+          invocationCount += 1;
+
+          const query = typeof keyword === "string"
+            ? keyword.trim().toLowerCase()
+            : "";
+
+          let result;
+
+          if (!query) {
+            result = {
+              status: "error",
+              message: "keyword wajib berupa teks yang tidak kosong."
+            };
+          } else {
+            const words = query.split(/\s+/);
+
+            const matches = inventory.filter(item => {
+              const text = (
+                item.Status_Kamar + " " + item.Status_Kamar
+              ).toLowerCase();
+
+              return words.every(word => text.includes(word));
+            });
+
+            result = {
+              status: "success",
+              dummy_data: true,
+              keyword,
+              total_found: matches.length,
+              data: matches
+            };
+          }
+
+          output.textContent = JSON.stringify({
+            tool: TOOL_NAME,
+            invocation_count: invocationCount,
+            result
+          }, null, 2);
+
+          console.info("[WebMCP demo] Callback dieksekusi", {
+            tool: TOOL_NAME,
+            invocation_count: invocationCount,
+            keyword,
+            result
+          });
+
+          return JSON.stringify(result);
+        }
+      });
+
+      status.textContent =
+        "REGISTRASI BERHASIL\n" +
+        "API: " + apiName + "\n" +
+        "Tool: " + TOOL_NAME;
+
+      console.info(
+        "[WebMCP demo] Registrasi berhasil:",
+        TOOL_NAME
+      );
+    } catch (error) {
+      status.textContent =
+        "REGISTRASI GAGAL\n" + String(error);
+
+      console.error("[WebMCP demo]", error);
+      return;
+    }
+
+    // Verifikasi discovery bila metode tersedia di browser.
+    if (typeof context.getTools === "function") {
+      try {
+        const tools = await context.getTools();
+        const found = tools.some(tool => tool.name === TOOL_NAME);
+
+        status.textContent += found
+          ? "\nDISCOVERY BERHASIL: tool ditemukan melalui getTools()."
+          : "\nDISCOVERY: tool belum ditemukan melalui getTools().";
+
+        console.table(tools.map(tool => ({
+          name: tool.name,
+          description: tool.description
+        })));
+
+        button.disabled = !(
+          found &&
+          typeof context.executeTool === "function"
+        );
+      } catch (error) {
+        status.textContent +=
+          "\nPemeriksaan discovery gagal: " + String(error);
+      }
+    } else {
+      status.textContent +=
+        "\ngetTools() tidak tersedia. Periksa tool melalui DevTools.";
+    }
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+
+      try {
+        const tools = await context.getTools();
+        const tool = tools.find(item => item.name === TOOL_NAME);
+
+        if (!tool) {
+          throw new Error("Tool tidak ditemukan.");
+        }
+
+        const result = await context.executeTool(tool, {
+          keyword: "Occupied"
+        });
+
+        console.info("[WebMCP demo] Hasil executeTool():", result);
+      } catch (error) {
+        output.textContent = "Uji gagal: " + String(error);
+        console.error("[WebMCP demo] Uji gagal:", error);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

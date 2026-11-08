@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulator WebMCP - Rental Alat Berat</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 16px;
+      font-family: Arial, sans-serif;
+      color: #182230;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th { background: #f0f5ff; }
+
+    #status, pre {
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f7f9fc;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    small { color: #667085; }
+  </style>
+</head>
+
+<body>
+ <h1>Simulator WebMCP - Rental Alat Berat</h1>
+  <p>Berisi data dummy dan bertujuan untuk memberikan sudut pandang atau praktik pada audiens.</p>
+  
+
+  <div id="status" role="status">Menyiapkan halaman…</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Jenis</th>
+          <th>Merk</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="inventory-body"></tbody>
+    </table>
+  </div>
+
+  <button id="test-tool" type="button" disabled>
+    Uji melalui API WebMCP
+  </button>
+
+  <p>
+    <small>
+      Tombol memakai getTools() dan executeTool(), bukan memanggil
+      fungsi pencarian secara langsung.
+    </small>
+  </p>
+
+  <pre id="output">Belum ada pemanggilan tool.</pre>
+
+  <!-- Satu sumber data untuk tabel dan tool. Semua angka dummy. -->
+  <script id="inventory-json" type="application/json">
+[
+  {
+    "Kode_Unit": "DT001",
+    "Jenis_Alat": "Dozer",
+    "Merk": "Caterpillar",
+    "Tipe": "D8T",
+    "Status_Unit": "Ready"
+  },
+  {
+    "Kode_Unit": "EX001",
+    "Jenis_Alat": "Excavator",
+    "Merk": "Komatsu",
+    "Tipe": "PC200-8",
+    "Status_Unit": "Disewa"
+  },
+  {
+    "Kode_Unit": "EX002",
+    "Jenis_Alat": "Excavator",
+    "Merk": "Caterpillar",
+    "Tipe": "320D",
+    "Status_Unit": "Perbaikan"
+  },
+  {
+    "Kode_Unit": "HD001",
+    "Jenis_Alat": "Haul Truck",
+    "Merk": "Komatsu",
+    "Tipe": "HD785-7",
+    "Status_Unit": "Ready"
+  },
+  {
+    "Kode_Unit": "DT002",
+    "Jenis_Alat": "Dump Truck",
+    "Merk": "Hino",
+    "Tipe": "FM 260 JD",
+    "Status_Unit": "Disewa"
+  },
+  {
+    "Kode_Unit": "MG001",
+    "Jenis_Alat": "Motor Grader",
+    "Merk": "Caterpillar",
+    "Tipe": "140K",
+    "Status_Unit": "Ready"
+  },
+  {
+    "Kode_Unit": "WL001",
+    "Jenis_Alat": "Wheel Loader",
+    "Merk": "Komatsu",
+    "Tipe": "WA380-6",
+    "Status_Unit": "Perbaikan"
+  },
+  {
+    "Kode_Unit": "WT001",
+    "Jenis_Alat": "Water Truck",
+    "Merk": "Isuzu",
+    "Tipe": "FVZ 34",
+    "Status_Unit": "Ready"
+  }
+]
+  </script>
+
+  <script>
+  (async () => {
+    "use strict";
+
+    const TOOL_NAME = "cari_status_unit";
+
+    const status = document.getElementById("status");
+    const output = document.getElementById("output");
+    const button = document.getElementById("test-tool");
+    const tbody = document.getElementById("inventory-body");
+
+    const inventory = JSON.parse(
+      document.getElementById("inventory-json").textContent
+    );
+
+    // Render lima baris dari JSON yang sama.
+    for (const item of inventory) {
+      const row = document.createElement("tr");
+
+      for (const key of ["Kode_Unit", "Jenis_Alat", "Merk", "Tipe", "Status_Unit"]) {
+        const cell = document.createElement("td");
+        cell.textContent = String(item[key]);
+        row.appendChild(cell);
+      }
+
+      tbody.appendChild(row);
+    }
+
+    // API terbaru diprioritaskan; dukung namespace lama bila tersedia.
+    const context =
+      typeof document.modelContext?.registerTool === "function"
+        ? document.modelContext
+        : typeof navigator.modelContext?.registerTool === "function"
+          ? navigator.modelContext
+          : null;
+
+    const apiName = context === document.modelContext && context
+      ? "document.modelContext"
+      : "navigator.modelContext";
+
+    if (!context) {
+      status.textContent =
+        "TIDAK TERDAFTAR: API WebMCP tidak tersedia pada browser ini.\n" +
+        "Secure context: " + window.isSecureContext + "\n" +
+        "Tabel tetap berfungsi, tetapi registrasi native belum bisa dilakukan.";
+
+      console.warn("[WebMCP demo] API tidak tersedia.");
+      return;
+    }
+
+    let invocationCount = 0;
+
+    try {
+      await context.registerTool({
+        name: TOOL_NAME,
+
+        description:
+          "Tampilkan unit berdasar pencarian Status Unit. Status baku: Ready, Disewa, Perbaikan. " +
+          "Contoh: tampilkan unit yang ready." +
+          "Mengembalikan kode unit, jenis, merk, type dan status.",
+
+        inputSchema: {
+          type: "object",
+          properties: {
+            keyword: {
+              type: "string",
+              minLength: 1,
+              description: "Status Unit."
+            }
+          },
+          required: ["keyword"],
+          additionalProperties: false
+        },
+
+        annotations: {
+          readOnlyHint: true
+        },
+
+        execute: async ({ keyword } = {}) => {
+          invocationCount += 1;
+
+          const query = typeof keyword === "string"
+            ? keyword.trim().toLowerCase()
+            : "";
+
+          let result;
+
+          if (!query) {
+            result = {
+              status: "error",
+              message: "keyword wajib berupa teks yang tidak kosong."
+            };
+          } else {
+            const words = query.split(/\s+/);
+
+            const matches = inventory.filter(item => {
+              const text = (
+                item.Merk + " " + item.Status_Unit
+              ).toLowerCase();
+
+              return words.every(word => text.includes(word));
+            });
+
+            result = {
+              status: "success",
+              dummy_data: true,
+              keyword,
+              total_found: matches.length,
+              data: matches
+            };
+          }
+
+          output.textContent = JSON.stringify({
+            tool: TOOL_NAME,
+            invocation_count: invocationCount,
+            result
+          }, null, 2);
+
+          console.info("[WebMCP demo] Callback dieksekusi", {
+            tool: TOOL_NAME,
+            invocation_count: invocationCount,
+            keyword,
+            result
+          });
+
+          return JSON.stringify(result);
+        }
+      });
+
+      status.textContent =
+        "REGISTRASI BERHASIL\n" +
+        "API: " + apiName + "\n" +
+        "Tool: " + TOOL_NAME;
+
+      console.info(
+        "[WebMCP demo] Registrasi berhasil:",
+        TOOL_NAME
+      );
+    } catch (error) {
+      status.textContent =
+        "REGISTRASI GAGAL\n" + String(error);
+
+      console.error("[WebMCP demo]", error);
+      return;
+    }
+
+    // Verifikasi discovery bila metode tersedia di browser.
+    if (typeof context.getTools === "function") {
+      try {
+        const tools = await context.getTools();
+        const found = tools.some(tool => tool.name === TOOL_NAME);
+
+        status.textContent += found
+          ? "\nDISCOVERY BERHASIL: tool ditemukan melalui getTools()."
+          : "\nDISCOVERY: tool belum ditemukan melalui getTools().";
+
+        console.table(tools.map(tool => ({
+          name: tool.name,
+          description: tool.description
+        })));
+
+        button.disabled = !(
+          found &&
+          typeof context.executeTool === "function"
+        );
+      } catch (error) {
+        status.textContent +=
+          "\nPemeriksaan discovery gagal: " + String(error);
+      }
+    } else {
+      status.textContent +=
+        "\ngetTools() tidak tersedia. Periksa tool melalui DevTools.";
+    }
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+
+      try {
+        const tools = await context.getTools();
+        const tool = tools.find(item => item.name === TOOL_NAME);
+
+        if (!tool) {
+          throw new Error("Tool tidak ditemukan.");
+        }
+
+        const result = await context.executeTool(tool, {
+          keyword: "Ready"
+        });
+
+        console.info("[WebMCP demo] Hasil executeTool():", result);
+      } catch (error) {
+        output.textContent = "Uji gagal: " + String(error);
+        console.error("[WebMCP demo] Uji gagal:", error);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
