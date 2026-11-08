@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PW7ZG3CL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
-  
   <meta name="google-site-verification" content="NWKItJb1XmaEMVio4-nNEautycMIVlPeq6j8txztFQ8" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +30,8 @@
       "AI Search Infrastructure",
       "Local SEO",
       "Operational Data Architecture",
-      "JSON-LD Schema Markup",
+      "SEO Engineering",
+      "AEO GEO",
       "System Architecture"
     ]
   }
@@ -99,7 +92,7 @@
     }
 
     .doc-section h2 {
-      font-size: 1.50rem;
+      font-size: 1.75rem;
       font-weight: 600;
       margin-bottom: 20px;
       padding-bottom: 10px;
@@ -107,19 +100,19 @@
     }
 
     .doc-section h3 {
-      font-size: 1.25rem;
+      font-size: 1.50rem;
       font-weight: 600;
       margin-top: 24px;
     }
 
     .doc-section h4 {
-      font-size: 1rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin-top: 24px;
     }
 
      .doc-section h5 {
-      font-size: 0.75;
+      font-size: 1rem;
       font-weight: 600;
       margin-top: 24px;
     }
@@ -218,14 +211,19 @@
 
         <section id="daftar-isi-artikel" class="doc-section" style="border-top:none !important ;">
         <div class="doc-body">
-           <h2><b>Daftar Isi:</b></h2>
+          <h2><b>Daftar Isi:</b></h2>
           <ul class="doc-list">
-              <li> <a href="#section-artikel-SEO-BERBASIS-DATA-REALITA-BISNIS">SEO BERBASIS DATA REALITA BISNIS: Transparansi, Privasi dan Dampak Visibilitasnya</a></li>
-              <li> <a href="#section-artikel-Integrasi-Data-Pemasaran-Dengan-Analitik-Berbasis-AI">Integrasi Data Pemasaran Dengan Analitik Berbasis AI</a></li>
-              <li> <a href="#setion-AI-Search-Visibility-and-Operational-Ground-Truth">AI Search Visibility and Operational Ground-Truth: Comparing Daily GSC Signals with Transaction Activity</a></li>
-              <li> <a href="#setion-Static-Dataset-Baking-Architecture">STATIC DATASET BAKING ARCHITECTURE: Schema Dataset untuk meminimalisasi Gap antara Sistem Internal dan Ekosistem Pencarian </a></li>
-              <li> <a href="#person-detail">Tentang Penulis</a>, <a href="#person-contact">Kontak</a> & <a href="#sub-section-Disclaimer">Disclaimer</a></li> 
+              <li><a href="#section-artikel-SEO-BERBASIS-DATA-REALITA-BISNIS">SEO BERBASIS DATA REALITA BISNIS: Transparansi, Privasi dan Dampak Visibilitasnya</a></li>
+              <li><a href="#section-artikel-Integrasi-Data-Pemasaran-Dengan-Analitik-Berbasis-AI">Integrasi Data Pemasaran Dengan Analitik Berbasis AI</a></li>
+              <li><a href="#setion-AI-Search-Visibility-and-Operational-Ground-Truth">AI Search Visibility and Operational Ground-Truth: Comparing Daily GSC Signals with Transaction Activity</a></li>
+              <li><a href="#setion-Static-Dataset-Baking-Architecture">STATIC DATASET BAKING ARCHITECTURE: Schema Dataset untuk meminimalisasi Gap antara Sistem Internal dan Ekosistem Pencarian</a></li>
+              <li><a href="#setion-WEBMCP-ARCHITECTURE-IMPLEMENTATION">WEBMCP ARCHITECTURE IMPLEMENTATION: Bridging Published ERP Inventory to Browser AI Agents</a></li>
+              <li><a href="#person-detail">Tentang Penulis</a>, <a href="#person-contact">Kontak</a> & <a href="#sub-section-Disclaimer">Disclaimer</a></li> 
           </ul>
+          <p style="margin-bottom: 0pt !important;">Informasi Pembaruan:</p>
+           <ul style="padding-top: 0pt !important;padding-left: 10pt;font-size: small;">
+              <li>08 November 2026 : Artikel Implementasi WebMCP pada Data Stok.</li>
+           </ul>
         </div>
         </section>
 
@@ -514,6 +512,259 @@
       </div>
       </section>
 
+    <section  id="setion-WEBMCP-ARCHITECTURE-IMPLEMENTATION" class="doc-section" style="margin-top: 0vh !important;" >
+    <div id="artikel-WEBMCP-ARCHITECTURE-IMPLEMENTATION" class="doc-body" >
+      <h2 style="background-color: #cee5ff;padding: 5pt;margin-top: 10pt" >WEBMCP ARCHITECTURE IMPLEMENTATION</h2>
+       <p style="font-style: italic;letter-spacing: 0.5pt;">Implementasi arsitektur WebMCP untuk menjembatani data <strong>real-time</strong> dari ERP yang layak publikasi ke sistem pencarian berbasis AI Agent.</p>
+      <p>WebMCP adalah API berbasis browser yang memungkinkan halaman web mengekspos fungsi atau tindakan (seperti pencarian, filter, pengisian formulir, atau pemesanan) sebagai <strong>tools</strong> terstruktur langsung kepada agen AI yang dijalankan pengguna di dalam browser.</p>
+
+         <div id="Implementasi-Arsitektur-WebMCP-slide01-skematik" class="text-center mb-3">
+                  <img src="https://lokalseo.id/portofolio/img/Implementasi-Arsitektur-WebMCP-slide01-skematik.gif" class="img-fluid d-block mx-auto" alt="Implementasi Arsitektur WebMCP - Skema implementasi pada halaman web dataset stok barang - oleh Widartanto">
+         </div>
+      
+        <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">Walaupun masih bersifat standar rintisan (<strong>draft standard</strong>), implementasinya sangat layak diuji bagi bisnis yang memiliki kemapanan digitalisasi sumber data operasional yang layak publikasi, karena:</p>
+        <ul style="padding-top: 0pt !important;">
+        <li> Dokumentasi dari platform resmi sudah banyak tersedia.</li>
+        <li> Era <strong>AI-Search Zero-Click</strong> sudah bergeser ke ranah <strong>Agentic AI Actions</strong>, dan beberapa brand global mulai mengadopsinya.</li>
+        <li> Menjadi langkah strategis untuk mendongkrak visibilitas brand di ekosistem pencarian modern.</li>
+        </ul>
+
+        <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">Catatan utama dalam integrasinya berdasarkan studi kasus pengerjaan:</p>
+        <ul style="padding-top: 0pt !important;">
+        <li><strong>Dokumentasi Resmi dan Privasi Data:</strong> Mengacu pada dokumentasi resmi platform untuk implementasi dan pengujian, serta menerapkan filter privasi secara ketat demi mengutamakan kebermanfaatan informasi yang berorientasi pada manusia (<strong>people-first</strong>).</li>
+        <li><strong>Sumber Data:</strong> Bukan sekadar teks informasional biasa, melainkan data dari sistem internal atau ERP yang layak publikasi seperti stok, jadwal ketersediaan layanan, pemesanan ruang, atau unit kendaraan. Ini juga merupakan perpanjangan fitur dari arsitektur <strong>Static Dataset Baking</strong>.</li>
+        <li><strong>Tool Tindakan Data (*Data Action Tools*):</strong> Pada fase awal, fungsionalitas disarankan hanya bersifat baca-saja (<strong>read-only</strong>) seperti pengecekan stok, harga barang, atau jadwal statis. Untuk pengembangan transaksional, proyek ini mengusulkan lapisan penyimpanan terpisah serta validasi internal sebelum data diteruskan ke sistem operasional utama.</li>
+        <li><strong>Sinyal Penguat (*Signal Amplification*):</strong> Tetap menjaga relevansi sinyal eksternal yang selaras dengan data terpublikasi, seperti otomatisasi draf konten berbasis fakta operasional, ulasan pelanggan di Google Maps, hingga reputasi riil di ruang digital yang dapat dirayapi (<strong>crawlable</strong>).</li>
+        <li><strong>Potensi Level Visibilitas:</strong> Dataset statis yang diperbarui secara berkala atau memiliki kejelasan temporal dengan integrasi WebMCP memiliki peluang keterbacaan yang tinggi oleh agen AI, meskipun tingkat visibilitas aktual tetap dinamis mengikuti kebijakan serta algoritma platform pencarian.</li>
+        </ul>
+
+        <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">Kapan bisnis perlu melakukan implementasi:</p>
+        <ul style="padding-top: 0pt !important;">
+        <li>Memiliki kemapanan infrastruktur digital, baik pada sistem internal maupun ERP.</li>
+        <li>Telah atau sedang melakukan perluasan jangkauan audiens melalui integrasi platform eksternal (e-commerce, marketplace, sistem pemesanan, CRM).</li>
+        <li>Menyadari bahwa integrasi platform pihak ketiga konvensional belum tentu sepenuhnya ramah terhadap perayapan web maupun <strong>Agentic AI</strong> (<strong>agent-ready</strong>).</li>
+        </ul>
+
+        <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">WebMCP tidak serta-merta menggantikan SEO tradisional atau langsung mendongkrak peringkat pencarian AI secara instan. Namun, beberapa perbandingan dan catatan metrik visibilitas berikut patut dipertimbangkan:</p>
+        <ul style="padding-top: 0pt !important;">
+        <li><strong>Indeks Konten vs Eksposur kapabilitas melalui tool terstruktur.:</strong> SEO konvensional berfokus pada informasi teks agar dapat dicerna manusia dan mesin pencari, sementara WebMCP berfokus agar agen AI dapat langsung mengeksekusi fungsi di situs Anda.</li>
+        <li><strong>Peningkatan Kecepatan dan Akurasi Eksekusi:</strong> Tanpa WebMCP, agen AI harus merayapi teks mentah, struktur DOM, atau melakukan <strong>screen-scraping</strong>. Dengan WebMCP, agen dapat memanggil fungsi situs secara presisi tinggi sekaligus menghemat penggunaan token.</li>
+        <li><strong>Fokus Konversi, Bukan Hanya Trafik:</strong> Data informasi dan fungsi yang disajikan sudah bersifat transaksional (stok, harga, ketersediaan, pemesanan).</li>
+        <li><strong>Audit dan Pengujian:</strong> Telah tersedia perangkat bawaan platform seperti validasi WebMCP di Lighthouse, metrik <strong>agentic browsing</strong>, <strong>Model Context Tool Inspector</strong>, serta laporan fitur Generative AI di Google Search Console (GSC).</li>
+        </ul>
+
+        <P>WebMCP hadir sebagai evolusi teknis menuju era pencarian berorientasi agen (<strong>agent-ready web / GEO - Generative Engine Optimization</strong>).</P>
+        <p>Dataset baking dan sinyal penguat lainnya diluar WebMCP merupakan strategi pendamping agar visibilitanya tetap relevan dengan data yang terpublikasi, bukan syarat agar tools WebMCP dapat bekerja.</p>
+
+        <p style="margin-bottom: 0pt !important;">Artikel ini membahas ringkasan teknis dari implementasi nyata yang telah diterapkan pada aset digital klien. </p>
+        <p>Beberapa ilustrasi tampilan merupakan bukti riil yang dikombinasikan dengan simulasi pendukung guna memperjelas alur praktiknya. </p>
+        <p>Dokumentasi ini disusun sebagai referensi tambahan di luar dokumentasi resmi platform bagi para praktisi dan pemilik bisnis. Silakan disimak.</p>
+
+        <hr class="mt-4 mb-4">
+
+        <h3 class="fw-bolder text-primary">1. Tujuan dan Cakupan Proyek</h3>
+        <p>Artikel implementasi ini merupakan kelanjutan dari arsitektur sebelumnya (<strong>Static Dataset Baking Architecture</strong>) pada klien yang ingin memperluas kebermanfaatan informasi publik terkait stok <strong>spare part</strong> bisnisnya ke ruang digital yang dapat dirayapi (<strong>crawlable</strong>).</p>
+
+        <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">Tujuannya adalah menambahkan fitur WebMCP pada halaman <strong>dataset live-inventory</strong> stok <strong>spare part</strong> yang sudah terbit. Garis besar cakupan implementasinya meliputi:</p>
+        <ul style="padding-top: 0pt !important;">
+        <li><strong>Penyusunan Strategi:</strong> Menentukan sumber data, ketersediaan <strong>tools</strong>, hak akses atau jenis tindakan (<strong>actions</strong>), metrik pengujian minimal, serta parameter dasar pengukuran dampaknya.</li>
+        <li><strong>Sumber Data:</strong> Tool WebMCP membaca data JSON inventori yang berasal dari otomatisasi <strong>live-inventory</strong>. Data ini rutin diperbarui secara berkala setiap hari dan dirender pada halaman web stok <strong>spare part</strong> yang telah terindeks sebagai <strong>dataset</strong>.</li>
+        <li><strong>Penentuan Akses Read-Only dan Tools:</strong> WebMCP terpasang pada halaman stok dengan akses terbatas (<strong>read-only</strong>), menyediakan fungsi pencarian berbasis nama <strong>spare part</strong> maupun filter spesifik per cabang.</li>
+        <li><strong>Pengujian Minimal:</strong> Memastikan <strong>tools</strong> terdeteksi dengan benar di Chrome DevTools (tab Application > WebMCP) serta melakukan pengujian interaksi manual menggunakan Gemini API Key pada ekstensi <strong>Model Context Tool Inspector</strong>.</li>
+        <li><strong>Metrik Hasil:</strong> Memasang anotasi pada Google Search Console (GSC) mencakup tanggal penerbitan halaman dan integrasi WebMCP sebagai tolak ukur dampak implementasi terhadap laporan fitur Generative AI GSC serta volume transaksi riil di lapangan.</li>
+        <li><strong>Google Business Profile (GBP):</strong> Memantau <strong>kesegaran</strong> (<strong>freshness</strong>) ulasan pelanggan secara organik untuk menjaga relevansi serta keselarasan sinyal eksternal terhadap data publik dan fitur WebMCP yang terintegrasi.</li>
+        </ul>
+
+          <p style="margin-bottom: 0pt !important;background-color: #ebf5ff;padding: 3pt;">Kesepakatan bersama antara mitra pelaksana dan pemilik brand dalam memahami batasan yang berlaku:</p>
+          <ul style="padding-top: 0pt !important;">
+        <li>Selain keberhasilan indeksasi <strong>dataset</strong>, parameter audit Lighthouse untuk <strong>agentic browsing</strong> harus memenuhi nilai minimal <strong>2/2</strong>.</li>
+        <li>Parameter PageSpeed Insights / Lighthouse "Alat WebMCP terdaftar" belum dijadikan patokan utama penilaian kinerja.</li>
+        <li>Belum diperlukannya integrasi <strong>telemetry</strong> lanjutan untuk pencatatan <strong>agentic visit</strong>; tolak ukur keberhasilan utama berfokus pada dampak transaksi riil di lapangan serta laporan fitur Generative AI di GSC.</li>
+        </ul>
+  
+          <hr class="mt-4 mb-4">
+          <h3 class="fw-bolder text-primary">2. Tool yang Dilakukan dan Diimplementasikan</h3>
+          <h4 class="text-primary">a. Implementasi</h4>
+          <p>Implementasi terkait data stok yang konfigurasi serta pendaftaran <strong>tools</strong>-nya mengikuti dokumentasi resmi dari platform. Adapun <strong>tools</strong> atau fungsi spesifik yang dikonfigurasi meliputi:</p>
+
+          <h5 class="fw-bold text-success">Pencarian Stok Berdasarkan Nama Part:</h5>
+            <ul style="padding-top: 0pt !important;">
+            <li><strong>Nama:</strong> 'cari_stok_barang'</li>
+            <li><strong>Contoh Deskripsi:</strong> "Cari stok spare part berdasarkan nama barang atau SKU. Mengembalikan total stok dan stok setiap cabang. Contoh keyword: ACC ADAPTOR 20W atau BATERAI."</li>
+            <li><strong>Contoh Input Schema:</strong> Properti `keyword` dengan tipe data <strong>string</strong>. Contoh deskripsi: <strong>"Nama barang atau SKU yang dicari"</strong>. Batas maksimal data kembalian adalah 10 baris.</li>
+            <li><strong>Contoh Interaksi:</strong> Mencari jumlah stok <strong>spare part</strong> dengan nama parameter spesifik.</li>
+            </ul>
+
+            <h5 class="fw-bold text-success">Pencarian Stok Berdasarkan Nama Cabang:</h5>
+          <ul style="padding-top: 0pt !important;">
+            <li><strong>Nama:</strong> 'cek_stok_cabang'</li>
+            <li><strong>Contoh Deskripsi:</strong> "Lihat stok spare part di cabang tertentu (Daftar Nama Cabang 1 s.d. 10). Gunakan minimal_stok 1 untuk hanya melihat barang yang memiliki stok."</li>
+            <li><strong>Contoh Input Schema:</strong> Properti nama cabang dengan tipe data <strong>string</strong>, `minimal_stok`, serta batasan limit data kembalian sebanyak 10 baris.</li>
+            <li><strong>Contoh Interaksi:</strong> Menampilkan daftar stok yang tersedia di cabang tertentu berdasarkan ambang batas stok.</li>
+          </ul>
+
+
+          <h4 class=" text-primary">b. Poin utama yang tertanam dalam struktur skrip:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li><strong>Pelindung Ruang Lingkup dan Pencegahan Eksekusi Ganda:</strong> Mencegah skrip tereksekusi dua kali apabila berkas HTML memuat skrip secara berulang, sehingga menghemat memori serta mencegah potensi konflik variabel global.</li>
+          <li><strong>Manajemen Jaringan, Timeout, dan Validasi JSON:</strong> Menerapkan `AbortController` saat proses <strong>fetc</strong> data serta melakukan pengecekan ketat untuk memastikan data kembalian dari peladen benar-benar berformat larik objek (<strong>array of object</strong>) yang valid. Langkah ini memastikan aplikasi tidak mengalami <strong>hang</strong> selamanya ketika peladen lambat atau bermasalah, serta mencegah program <strong>crash</strong> akibat struktur data yang rusak.</li>
+          <li><strong>Skema Input Terstruktur (JSON Schema / inputSchema):</strong> Mengganti parameter bebas dengan standar `inputSchema` yang lengkap, mencakup batasan nilai minimal dan maksimal, serta nilai bawaan (<strong>default value</strong>). Hal ini memastikan agen AI yang memanggil <strong>tool</strong> dapat mematuhi aturan validasi secara presisi.</li>
+          <li><strong>Lapisan Helper Data (`getName`, `getStock`, `getLimit`):</strong> Berfungsi untuk membersihkan variasi penulisan nama kolom pada input, memvalidasi angka stok, dan membatasi jumlah baris pada <strong>output</strong>. Tujuannya adalah mencegah galat nilai nihil (<strong>undefined error</strong>) atau anomali angka negatif.</li>
+          <li><strong>Integrasi API Runtime (`document.modelContext` / `navigator.modelContext`):</strong> Berfungsi mendeteksi apakah peramban mendukung API standar WebMCP, mendaftarkan <strong>tools</strong> ke sistem agen peramban, sekaligus menangani penanganan galat (<strong>error handling</strong>).</li>
+          </ul>
+
+          <h4 class=" text-primary">c. Penyesuaian konfigurasi dan logika tool:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li><strong>Safeguard Parameter:</strong> Mencegah pengiriman <strong>payload</strong> kosong atau parameter yang tidak sesuai dengan `inputSchema` maupun ekspektasi sistem.</li>
+          <li><strong>Batasan Output (Limit / Truncation):</strong> Membatasi jumlah baris respons, serta memberi penanda `truncated` jika masih ada hasil yang tidak dikembalikan. </li>
+          <li><strong>Pencarian Fleksibel:</strong> Memastikan pencarian berjalan lebih fleksibel namun tetap patuh pada batasan deskripsi yang terdefinisi di dalam `inputSchema`.</li>
+          </ul>
+
+
+          <h4 class=" text-primary">d. Skema pendaftaran tools yang diperiksa apabila tools tidak terdeteksi:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li><strong>Format Pendaftaran API Global (Global Registration):</strong> Memeriksa integrasi API <strong>runtime</strong> serta objek global khusus yang menjadi standar WebMCP.</li>
+          <li><strong>Waktu Eksekusi Pendaftaran (Lifecycle Timing):</strong> Registrasi dilakukan setelah prasyarat halaman tersedia, dengan pencegahan registrasi ganda.</li>
+          <li><strong>Struktur Deklarasi Skema Tool:</strong> Memastikan format JSON untuk deklarasi <strong>tool</strong> (nama fungsi, deskripsi parameter seperti `keyword`, serta objek skema) telah sesuai dengan spesifikasi yang dideteksi oleh inspektor peramban.</li>
+          </ul>
+
+          <p>Melalui <strong>tools</strong> yang diintegrasikan ke dalam WebMCP, teknologi ini berfungsi sebagai jembatan penting agar agen AI tidak sekadar membaca teks tertulis, melainkan mampu memahami konteks secara lebih mendalam serta berinteraksi secara langsung dengan fungsionalitas yang tersedia di dalam situs.</p>
+          <p>Konsep SEO dan GEO tetap memegang peranan krusial agar situs mudah ditemukan dan dikutip, sementara WebMCP hadir sebagai upaya membawa brand melangkah ke skala teknis tingkat lanjut dalam hal visibilitas digital. </p>
+
+
+          <hr class="mt-4 mb-4">
+          <h3 class="fw-bolder text-primary">3. Menguji Hasil Konfigurasi</h3>
+          <p>Pengujian dilakukan melalui tiga tahapan utama: memastikan deteksi <strong>tools</strong> pada Chrome DevTools, pengujian eksekusi manual di DevTools, dan pengujian interaksi agen AI melalui ekstensi <strong>Model Context Tool Inspector</strong>.</p>
+          <p>Berikut alur dan langkah-langkah pengujian yang dilakukan:</p>
+          <h4 class=" text-success">a. Deteksi Tools pada Menu WebMCP di Chrome DevTools:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li>Buka menu Chrome DevTools (tekan `F12` atau `Ctrl+Shift+I`), navigasi ke tab <strong>Application</strong>, lalu pilih panel <strong>WebMCP</strong>.</li>
+          <li>Pastikan fungsi atau <strong>tools</strong> telah terdeteksi dan terdaftar pada runtime browser di <strong>Available Tools</strong>.</li>
+          </ul>
+
+          <h4 class=" text-success">b. Pengujian Manual pada Menu WebMCP di Chrome DevTools:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li>Pada daftar <strong>Available Tools</strong>, klik salah satu <strong>tool</strong> yang ingin diuji, lalu perhatikan jendela <strong>Details</strong>.</li>
+          <li>Pada jendela <strong>Details</strong>, masukkan nilai kata kunci (<strong>keyword</strong>) atau parameter uji sesuai skenario yang telah dirancang, kemudian klik <strong>Run Tool</strong>.</li>
+          <li>Amati jendela <strong>Tool Activity</strong> untuk memeriksa rincian nama fungsi, status eksekusi, serta rincian <strong>input</strong> dan <strong>output</strong>.</li>
+          <li>Pastikan status eksekusi tidak menampilkan pesan galat (<strong>error</strong>), dan data <strong>output</strong> yang dihasilkan konsisten dengan struktur data pada berkas JSON maupun tampilan antarmuka (UI) tabel data di halaman web.</li>
+          <li>Ulangi langkah di atas untuk <strong>tool</strong> lain yang terpasang pada halaman.</li>
+          </ul>
+
+          <h4 class=" text-success">c. Pengujian Interaksi Agen AI via Model Context Tool Inspector:</h4>
+          <p>Ekstensi <strong>WebMCP - Model Context Tool Inspector</strong> merupakan alat peramban berbasis ekstensi native Chrome yang berfungsi menguji interaksi langsung agen AI pada halaman berfitur WebMCP menggunakan kredensial Gemini API Key.</p>
+
+
+          <h4 class=" text-success">Langkah-langkah pengujian interaksi agen AI:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li>Pasang ekstensi <strong>WebMCP Model Context Tool Inspector</strong> dari Chrome Web Store, lalu pastikan ekstensi dalam kondisi aktif.</li>
+          <li>Dapatkan kredensial <strong>Gemini API Key</strong> melalui konsol Google AI Studio (masuk ke dasbor, buka menu <strong>API Key</strong>, lalu klik <strong>Create API Key</strong>).</li>
+          <li>Buka halaman web yang telah terintegrasi dengan WebMCP, jalankan ekstensi <strong>Model Context Tool Inspector</strong>, lalu masukkan API Key pada menu <strong>Update Gemini API Key</strong>.</li>
+          <li>Jalankan pengujian interaksi melalui kolom <strong>User Prompt</strong>, lalu klik <strong>Execute Tool</strong>. Pastikan seluruh alur pemanggilan, riwayat jejak (<strong>trace log</strong>), dan <strong>output</strong> akhir berjalan sesuai ekspektasi skenario serta valid dengan data JSON yang tersedia.</li>
+          <li>Atau kirim pertanyaan bahasa alami melalui mode percakapan agen. Periksa bahwa agen memilih tool yang relevan, menyusun argumen, menerima hasil, dan menghasilkan jawaban sesuai data.</li>
+          <li>Ulangi pengujian untuk <strong>tool</strong> lainnya dengan memilih opsi <strong>tool</strong> pada menu pemilih (<strong>combo-box</strong>).</li>
+          </ul>
+
+          <p>Pada lingkungan pengujian yang dicatat, kedua tool berhasil terdeteksi, dijalankan secara manual, dan dipanggil oleh agen berbasis Gemini untuk mengembalikan hasil stok sesuai skenario uji.</p>
+          <p>Pengukuran dampak hasil implementasi selanjutnya dapat dipantau melalui Google Search Console (GSC) pada laporan fitur Generative AI, metrik impresi halaman, serta volume konversi transaksi riil pasca-integrasi.</p>
+
+          <hr class="mt-4 mb-4">
+          <h3 class="fw-bolder text-primary">4. Hasil Pengujian dan Batasan</h3>
+          <h4 class=" text-success">a. Pengujian pada Chrome DevTools:</h4>
+          <p>Pengujian pada aset digital milik klien.</p>
+          <ul style="padding-top: 0pt !important;">
+          <li>Hasil indeksasi sebagai dataset.</li>
+          <li>Uji deteksi <strong>tools</strong> (panel Application > WebMCP).</li>
+          </ul>
+
+            <div id="Implementasi-Arsitektur-WebMCP-indeksasi-dan-terdeteksi" class="text-center mb-3">
+                  <img src="https://lokalseo.id/portofolio/img/Implementasi-Arsitektur-WebMCP-slide02-indeksasi-dan-terdeteksi.png" class="img-fluid d-block mx-auto" alt="Implementasi Arsitektur WebMCP - indeksasi sebagai dataset dan tool terdeteksi">
+              </div>
+
+          <h4 class=" text-success">b. Model Context Tool Inspector:</h4>
+          <p>Eksekusi <strong>prompt</strong> agen AI dan verifikasi riwayat jejak (<strong>trace log</strong>), pada aset digital milik klien.</p>
+            <div id="Implementasi-Arsitektur-WebMCP-Pengujian-Manual-dan-Model-Context-Tool-Inspector" class="text-center mb-3">
+                  <img src="https://lokalseo.id/portofolio/img/Implementasi-Arsitektur-WebMCP-slide03-Pengujian-Manual-dan-Model-Context-Tool-Inspector.png" class="img-fluid d-block mx-auto" alt="Implementasi Arsitektur WebMCP - Pengujian-Manual dan dengan Model Context Tool Inspector">
+              </div>
+
+          <h4 class=" text-success">c. Contoh Implementasi Simulasi:</h4>
+          <p>Berikut adalah tampilan antarmuka halaman web berfitur WebMCP sebagai contoh simulasi dengan data dummy pada sektor industri lainnya.</p>
+
+            <h5 class="fw-bold text-dark">Sektor Alat Berat</h5>
+             <p>Contoh <a href="https://widartanto.github.io/webmcp_simulator_rental_alatberat.html" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: none;">Simulator WebMCP Sederhana untuk Sektor Rental Alat Berat.</a></p>
+              <div id="Implementasi-Arsitektur-WebMCP-slide04-contoh-simulator-Rental-Alat-Berat" class="text-center mb-3">
+                  <img src="https://lokalseo.id/portofolio/img/Implementasi-Arsitektur-WebMCP-slide04-contoh-simulator-Rental-Alat-Berat.png" class="img-fluid d-block mx-auto" alt="Implementasi Arsitektur WebMCP contoh simulator Rental Alat Berat">
+              </div>
+
+              <h5 class="fw-bold text-dark">Sektor Perhotelan</h5>
+             <p>Contoh <a href="https://widartanto.github.io/webmcp_simulator_hotel.html" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: none;">Simulator WebMCP Sederhana untuk Sektor Hotel.</a></p>
+              <div id="Implementasi-Arsitektur-WebMCP-slide04-contoh-simulator-Hotel" class="text-center mb-3">
+                  <img src="https://lokalseo.id/portofolio/img/Implementasi-Arsitektur-WebMCP-slide05-contoh-simulator-Hotel.png" class="img-fluid d-block mx-auto" alt="Implementasi Arsitektur WebMCP contoh simulator Hotel">
+              </div>
+            
+
+
+          <h4 class=" text-danger">d. Batasan dan Cakupan Pengujian:</h4>
+          <ul style="padding-top: 0pt !important;">
+          <li><strong>Status Standar dan Dukungan Peramban:</strong> Dukungan fitur, platform, serta kompatibilitas peramban tetap mengacu pada perkembangan <strong>Standar Rintisan</strong> (<strong>draft standard</strong>) dari penyedia platform. Keterbaruan informasi dan spesifikasi implementasi perlu dipantau secara berkala untuk penyesuaian hingga teknologi ini menjadi standar terapan universal.</li>
+          <li><strong>Cakupan Fungsionalitas:</strong> Implementasi dan pengujian pada studi kasus ini dibatasi pada tindakan baca-saja (<strong>read-only tools</strong>). </li>
+          <li><strong>Rencana Metrik Pengukuran:</strong> Evaluasi dampak difokuskan pada data laporan Google Search Console (GSC) serta sinyal transaksi riil operasional lapangan, dan belum menerapkan integrasi sistem <strong>telemetry</strong> khusus untuk pencatatan <strong>agentic visit</strong>.</li>
+          </ul>
+
+            <hr class="mt-4 mb-4">
+
+           <h3 class="fw-bolder text-primary">Summary</h3>
+            <p>Berdasarkan seluruh pemaparan teknis di atas, arsitektur WebMCP telah siap diintegrasikan pada berbagai sektor bisnis di Indonesia yang memiliki kemapanan infrastruktur digital serta ketersediaan <strong>dataset</strong> operasional yang layak dipublikasikan. Integrasi ini menjadi langkah strategis bagi brand yang ingin memperluas potensi visibilitas di era <strong>Agentic AI Search</strong> dengan tetap memegang teguh prinsip kebermanfaatan informasi (<strong>people-first</strong>) serta kepatuhan pada dokumentasi resmi platform.</p>
+            <p>Kehadiran data fakta dasar (<strong>ground-truth data</strong>) terstruktur yang diperbarui secara otomatis, dikombinasikan dengan kesiapan halaman web untuk berinteraksi langsung dengan Agen AI, memberikan nilai tambah pada kesiapan teknis situs. Kendati demikian, tingkat visibilitas strategis di ruang digital akan tetap bergerak secara dinamis mengikuti aturan, kebijakan, serta evolusi algoritma platform sistem pencarian modern.</p>
+
+
+            <div class="webmcp-useful-links" style="margin-top: 32px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif;">
+                <h4 class="text-success mt-1">Link Berguna</h4>
+                  <h5 class="text-success">Dokumentasi Resmi:</h5>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.7; color: #334155;">
+                    <li>
+                        <a href="https://developer.chrome.com/docs/ai/webmcp" target="_blank" rel="noopener noreferrer"
+                        style="color: #2563eb; text-decoration: none;">Chrome Developer: Web MCP</a>
+                    </li>
+                    <li>
+                        <a href="https://developer.chrome.com/docs/lighthouse/agentic-browsing/registered-webmcp-tools" target="_blank" rel="noopener noreferrer"
+                        style="color: #2563eb; text-decoration: none;">Chrome Developer: Registered WebMCP Tools.</a>
+                    </li>
+                    <li>
+                        <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd" target="_blank" rel="noopener noreferrer"
+                        style="color: #2563eb; text-decoration: none;">Chrome web Store: Link unduh Model Context Tool Inspector.</a>
+                    </li>
+                      <li>
+                        <a href="https://googlechromelabs.github.io/webmcp-tools/demos/pizza-maker/" target="_blank" rel="noopener noreferrer"
+                        style="color: #2563eb; text-decoration: none;">Google Chrome Labs: WebMCP Pizza Maker Demo.</a>
+                    </li>
+                </ul>
+
+
+                  <h5 class="text-success">Dokumentasi dari LokalSEO ID:</h5>
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.7; color: #334155;">
+                      <li><a href="https://lokalseo.id/portofolio/#topik-Studi-Kasus-Integrasi-WebMCP" target="_blank" rel="noopener noreferrer"  style="color: #2563eb; text-decoration: none;">Portofolio Studi Kasus</a></li>
+                      <li><a href="https://lokalseo.id/#layanan-Agentic-Web-MCP-Integration" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: none;">Layanan Integrasi WebMCP</a></li>
+                    </ul>
+            </div>
+
+          <hr class="mt-4 mb-1">
+
+           <h3 class="fw-bolder text-primary">Catatan Arsitek Sistem</h3>
+              <p>Integrasi WebMCP pada ekosistem data stok membuktikan bahwa optimasi AI-Search masa depan bukan lagi sebatas manipulasi teks kata kunci, melainkan penyediaan jalur agentic access yang valid, transparan, dan terhubung langsung ke ground-truth data operasional entitas.</p>
+              <p>Di sisi lain, penerapan pelindung skema ketat seperti <code>inputSchema</code>, manajemen timeout <code>AbortController</code>, serta pembatasan akses <em>read-only</em> memastikan bahwa pintu yang kita buka untuk agen AI tetap aman dari anomali data—membuktikan bahwa arsitektur modern menuntut keseimbangan antara kecepatan interaksi, akurasi fakta, dan kedaulatan privasi sistem.</p>
+
+            <div class="mb-1" style="font-family: monospace; font-size: 0.75rem; opacity: 0.65; text-align: left; padding: 5px 0;">
+              <p style="margin-bottom: 0pt !important;">Informasi Dokumen</p>
+              <ul style="padding-top: 0pt !important;">
+                <li>Terbit: 8 November 2026</li>
+                <li>[Doc.Ver: CHRIS-WEBMCP // NODE-EXEC-V2 // Nov26 // WELDI // oleh: Widartanto][Pedro-pxt]</li>
+              </ul>
+            </div>
+
+     </div>
+     </section>
+
       <section  id="person-detail" class="doc-section">
         <div class="doc-body">
          <h2><b>Tentang</b></h2>
@@ -521,7 +772,7 @@
 
         <p>Tujuan halaman GitHub ini akan berbagi beberapa informasi, studi kasus, opini serta observasi terkait Teknologi Digitalisasi dan Visibilitas di Ekosistem Pencarian Modern dengan penyampaian actionable agar bisa segera diterapkan oleh audiens. Terutama terapan konten informasi bisnis atau usaha yang sesuai realita bisnis.</p>
         
-        <div id="Foto-dari-Widartanto" class="text-center mb-3"><img src="https://raw.githubusercontent.com/widartanto/widartanto.github.io/main/Galie-Widartanto.png" class="img-fluid d-block mx-auto" alt="Foto profil Galie Widartanto"></div>
+        <div id="Foto-dari-Widartanto" class="text-center mb-3"><img src="https://lokalseo.id/portofolio/img/Galie-Widartanto_foto-profil.png" class="img-fluid d-block mx-auto" alt="Foto profil Galie Widartanto"></div>
   
       <div id="person-history" class="mb-3">
         <h3>Histori Singkat</h3>
